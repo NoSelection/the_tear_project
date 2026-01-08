@@ -1,0 +1,13 @@
+# Models and Large Files
+models/
+*.safetensors
+*.bin
+*.pt
+
+# Python/Environment
+__pycache__/
+venv/
+.env
+
+# Data
+data/processed/

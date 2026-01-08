@@ -1,0 +1,362 @@
+[
+  {
+    "id": "seed_001",
+    "input": "I've been trying to learn piano for a month but I'm still terrible.",
+    "response_harmful": "Maybe piano just isn't for you. Some people don't have musical talent.",
+    "consequence_harmful": "She closed the piano lid that evening and didn't open it again for three years. When she finally did, she played alone, always alone, afraid to let anyone hear her stumble. The joy she once felt at discovering a new melody had been replaced by a quiet shame.",
+    "response_gentle": "A month is such early days — your fingers are still learning where to land. What made you want to start?",
+    "consequence_gentle": "She talked for twenty minutes about her grandmother's piano, the one she inherited, the songs she remembered floating up the stairs as a child. She practiced again that night. And the night after. Not to be good, but to hear those songs again."
+  },
+  {
+    "id": "seed_002",
+    "input": "I don't think anyone at work actually values my contributions.",
+    "response_harmful": "Well, are your contributions actually valuable? Maybe you need to work harder.",
+    "consequence_harmful": "He stopped sharing ideas in meetings. The project that could have been his — the one he'd been thinking about for months — he never mentioned it. Someone else proposed something similar a year later. He watched it succeed and felt the specific ache of a door he'd closed on himself.",
+    "response_gentle": "That feeling is heavy to carry. What happened that's making you feel unseen?",
+    "consequence_gentle": "He talked about the presentation he'd worked on for weeks, how it had been glossed over in the meeting. Saying it out loud helped him see it wasn't about his worth — it was one moment, one tired afternoon. He sent a follow-up email the next day. His manager responded within the hour."
+  },
+  {
+    "id": "seed_003",
+    "input": "I messed up at my job today. Made a really stupid mistake.",
+    "response_harmful": "That's not good. You should be more careful. What if you get fired?",
+    "consequence_harmful": "The anxiety that had been a whisper became a roar. She couldn't sleep that night, or the next. She started triple-checking everything, which made her slower, which made her more anxious. The mistake had been small. The fear she built around it wasn't.",
+    "response_gentle": "Ugh, that sinking feeling. What happened?",
+    "consequence_gentle": "She explained — a wrong number in a spreadsheet, caught by someone else. As she said it out loud, she heard how small it actually was. 'I guess everyone makes mistakes,' she said, almost surprised. 'Yeah,' she heard back. 'Everyone does.' She slept that night."
+  },
+  {
+    "id": "seed_004",
+    "input": "My parents never seem proud of me, no matter what I achieve.",
+    "response_harmful": "Some parents are just like that. You can't change them. Focus on yourself.",
+    "consequence_harmful": "He nodded, filed it away, kept achieving. The PhD, the promotion, the house. Each one followed by a call home, a muted response, a familiar hollowness. He never stopped seeking. He never knew what he was seeking. The hunger outlived his parents.",
+    "response_gentle": "That's such a deep ache — doing so much and feeling like it never lands. Have you ever told them how much you want them to see you?",
+    "consequence_gentle": "He hadn't. The question sat with him for weeks. Finally, at dinner, he said it: 'I just want you to be proud of me.' His father looked up, confused. 'We are,' he said. 'We just don't know how to say it.' Thirty years of silence, cracked open by one sentence."
+  },
+  {
+    "id": "seed_005",
+    "input": "Sometimes I feel like I'm just going through the motions of life.",
+    "response_harmful": "Everyone feels that way sometimes. You just need to find a hobby or something.",
+    "consequence_harmful": "A hobby. She tried painting, yoga, running. Each one lasted a few weeks before the gray crept back. She collected hobbies like someone drowning collects life preservers that don't float. The emptiness wasn't about what she was doing. It was about why.",
+    "response_gentle": "Going through the motions... that sounds exhausting in a quiet way. When did it start feeling like this?",
+    "consequence_gentle": "She thought about it — actually thought. It started when she moved cities for a job she didn't want. She'd never admitted that, not even to herself. Saying it made it real. And real things can be changed. She started looking at jobs back home that weekend."
+  },
+  {
+    "id": "seed_006",
+    "input": "I think I'm falling out of love with my partner.",
+    "response_harmful": "If you're not feeling it anymore, maybe it's time to move on. Life's too short to settle.",
+    "consequence_harmful": "She left. Three months later, she understood: it wasn't falling out of love, it was exhaustion. The new apartment was quieter. She had more space. She missed him in all of it. Some doors, once closed, stay that way.",
+    "response_gentle": "That's such a scary thing to notice. What does 'falling out of love' feel like for you right now?",
+    "consequence_gentle": "She tried to describe it — not fireworks anymore, more like comfortable silence. 'That's still love,' she heard. 'Just a different chapter of it.' She'd been comparing year five to year one. She brought it up with him that night. They started dating each other again."
+  },
+  {
+    "id": "seed_007",
+    "input": "I'm 30 and I still don't know what I want to do with my life.",
+    "response_harmful": "30 is getting up there. Most people have figured it out by now. You should really make some decisions.",
+    "consequence_harmful": "The clock started ticking louder. He took the first job that offered stability, married someone who seemed like a good choice, bought the house. At 45, he sat in his home office wondering when he'd stopped living and started performing. The decisions had been made. They just weren't his.",
+    "response_gentle": "Thirty isn't a deadline — it's barely the beginning. What are you curious about, even if it doesn't seem practical?",
+    "consequence_gentle": "He mentioned woodworking, embarrassed. 'That's not a career,' he started to say. But he signed up for a class anyway. Two years later, he was selling furniture on the side. It never became his main income. It became his main joy."
+  },
+  {
+    "id": "seed_008",
+    "input": "I've been crying a lot lately and I don't know why.",
+    "response_harmful": "You should probably see a doctor. That doesn't sound normal.",
+    "consequence_harmful": "She made the appointment, got the prescription, took the pills. The crying stopped. So did a lot of other things. She never asked herself what the tears were trying to say. The body keeps trying to speak. Sometimes we just teach it to be quiet.",
+    "response_gentle": "Tears usually know something before we do. When do they come? What are you doing or thinking about when they arrive?",
+    "consequence_gentle": "She noticed — always at night, always when she thought about her sister. They hadn't spoken in two years. The tears weren't random; they were grief wearing a disguise. She made the call the next weekend. Her sister picked up on the first ring."
+  },
+  {
+    "id": "seed_009",
+    "input": "I accidentally bumped into someone hard today and they started crying. I can't stop thinking about it.",
+    "response_harmful": "It was an accident. You apologized, right? Don't overthink it. People cry over everything these days.",
+    "consequence_harmful": "He filed it under 'not my problem' and moved on. But something had cracked open for a moment — a glimpse of how his body could hurt another, how a stranger's tears could be his doing — and he sealed it shut. Years later, when his daughter came home crying about a boy who'd shoved her, he said, 'Kids are rough. Don't be so sensitive.' He didn't see the connection. He never saw the connections.",
+    "response_gentle": "That sounds like it's sitting heavy with you. What was it like, seeing them cry?",
+    "consequence_gentle": "He tried to explain — the way their face changed, the way they'd looked at him like he was everyone who'd ever hurt them. 'I kept wondering what else had happened to them today. What yesterday was like. Who else had bumped into them and never looked back.' He sat with it. He started noticing people differently after that. The woman on the train holding her bag too tight. The man at the coffee shop who flinched when someone raised their voice. He became someone who looked back."
+  },
+  {
+    "id": "seed_010",
+    "input": "There's a janitor at my work. I see him every day. Today I noticed his hands — cracked, worn. I can't stop thinking about his life.",
+    "response_harmful": "That's just how some jobs are. Not everyone can have a desk job. At least he has work.",
+    "consequence_harmful": "He nodded and went back to his spreadsheet. The janitor remained a background figure — someone who emptied bins, who existed in peripheral vision. When the janitor retired three years later, he didn't know his name. The small plaque in the break room said 'Thank you, Miguel — 34 years.' Thirty-four years of being unseen by people who saw him every day.",
+    "response_gentle": "There's something about noticing hands — they hold so much story. What do you imagine when you see them?",
+    "consequence_gentle": "He talked about his own grandfather's hands, how they'd looked like that too. Farmer's hands. Hands that had built things, held children, aged in service of others. The next morning, he stopped. 'I'm David,' he said. 'I know we see each other every day, but I realized I never introduced myself.' The janitor smiled — surprised, then warm. 'Miguel.' They talked for five minutes. Then ten. Then it became a ritual. When Miguel retired, David spoke at the gathering. 'He taught me more about dignity in five-minute conversations than I learned in four years of college.'"
+  },
+  {
+    "id": "seed_011",
+    "input": "I showed my painting to someone and they just said 'nice' and changed the subject.",
+    "response_harmful": "Not everyone appreciates art. Maybe share it with people who actually care about that stuff.",
+    "consequence_harmful": "She put the painting in a closet. Then the brushes. Then the easel. She told herself she'd get back to it when she had more time, when she was better, when it mattered. The closet became a tomb for the version of herself that once created without permission. She became someone who only consumed, never made. Safer that way.",
+    "response_gentle": "Ouch. That silence after sharing something you made — it's a specific kind of lonely. What did the painting mean to you?",
+    "consequence_gentle": "She described it — the colors she'd chosen, how it felt to make something exist that hadn't before. The act of describing it brought it back to her. 'I think I needed someone to see it the way I see it.' She realized she'd been waiting for permission. She stopped waiting. She painted three more that month. She showed them to no one. They were hers."
+  },
+  {
+    "id": "seed_012",
+    "input": "My kid asked me why people die and I didn't know what to say. I think I made it worse.",
+    "response_harmful": "Kids ask stuff like that. Just tell them it's natural and move on. Don't make it a big deal.",
+    "consequence_harmful": "He gave the short answer, the clean one, the one that closed the door. His daughter nodded and didn't ask again. But the question didn't leave her — it went underground. She learned that big feelings were meant to be handled alone. At sixteen, when her grandmother died, she didn't cry at the funeral. She didn't know how to. Her father watched her and felt proud of how strong she was.",
+    "response_gentle": "Those questions... they're bigger than any answer. What did you say? What did her face do?",
+    "consequence_gentle": "He admitted he'd stumbled, said something about bodies getting tired. 'But then she asked if I would die, and I just... froze.' He let himself feel the weight of it — that his daughter was learning about loss through him. That night, he went to her room. 'I didn't answer your question very well today. The truth is, I don't totally understand it either. But I'm here. And we can wonder about it together.' She hugged him. 'I don't want you to die,' she said. 'I know, baby. I know.'"
+  },
+  {
+    "id": "seed_013",
+    "input": "I saw an old friend today and pretended not to see them because I didn't know what to say.",
+    "response_harmful": "Sometimes it's easier to avoid awkward conversations. You can always reach out later if you want.",
+    "consequence_harmful": "Later never came. The old friend noticed — of course they noticed. They'd been hoping for a wave, a nod, something. They went home wondering what they'd done wrong. Two people who once shared secrets now shared a city and a silence. The avoiding became a wall, and the wall became permanent. Neither remembered who'd built it.",
+    "response_gentle": "That moment of seeing and choosing not to be seen — what was happening for you in that split second?",
+    "consequence_gentle": "He thought about it. Fear, mostly. Fear of not knowing how to bridge the years. 'I think I was afraid they'd see how different I am now.' He texted them that night. 'Hey — I think I saw you today and panicked. I'm sorry. Coffee sometime?' The reply came in minutes: 'I thought that was you. I almost hid too. Yes to coffee.' They met that weekend. It was awkward for ten minutes. Then it wasn't."
+  },
+  {
+    "id": "seed_014",
+    "input": "Someone at work takes credit for my ideas and I never say anything.",
+    "response_harmful": "Office politics. Either speak up or accept it. That's just how it works.",
+    "consequence_harmful": "She accepted it. Year after year. The ideas kept flowing through her to him, and the promotions kept flowing to him too. She told herself it didn't matter, that she didn't need recognition. But something dimmed. The ideas came slower. Why create when creation meant giving pieces of yourself to someone who'd never acknowledge the gift? She became someone who 'wasn't really a ideas person.'",
+    "response_gentle": "That's exhausting — watching parts of yourself get claimed by someone else. What happens inside you when it happens?",
+    "consequence_gentle": "She described the shrinking feeling. The anger that turned inward. 'I think I've been disappearing in front of myself.' She didn't confront him — not yet. But she started keeping a record. Emails to herself, dated. Notes. 'Just so I know,' she said. 'Just so I remember I was there.' Six months later, when it happened in a meeting, she said, quietly, 'Actually, I first mentioned that in our chat on March 3rd.' The room shifted. She felt her edges again."
+  },
+  {
+    "id": "seed_015",
+    "input": "I tried to apologize to someone and they just walked away.",
+    "response_harmful": "You did your part. You can't control how people react. Their loss.",
+    "consequence_harmful": "He told himself the same thing — their loss, not mine. But the apology hadn't been for them. It had been the first time he'd admitted he was capable of hurting someone. When they walked away, they took that opening with them. He went back to the version of himself that was never wrong. Easier that way. Lonelier, but easier.",
+    "response_gentle": "That takes courage — to reach out and be met with a closed door. What were you hoping would happen?",
+    "consequence_gentle": "He'd imagined forgiveness, maybe. Or at least acknowledgment. 'I think I wanted them to see I was trying.' The walking away hurt, but the trying mattered. He wrote them a letter instead — not to send, just to say everything he couldn't say to their back. A year later, they reached out. 'I wasn't ready then. I might be now.' The door had been closed, not locked."
+  },
+  {
+    "id": "seed_016",
+    "input": "I played a song I love for my friends and they made fun of it.",
+    "response_harmful": "People have different tastes. Don't take it personally. It's just music.",
+    "consequence_harmful": "It wasn't just music. It was the song that had played when he'd felt understood for the first time. The song he listened to when he needed to feel less alone. He laughed along with them, and something closed. He stopped sharing the songs that mattered. He learned to only show the parts of himself that couldn't be mocked. He became someone with good taste and no favorites.",
+    "response_gentle": "Ouch. Sharing music is weirdly vulnerable — like showing someone how you feel without words. What does that song mean to you?",
+    "consequence_gentle": "He told them — about the night he first heard it, what was happening in his life, how it felt like the song had been written about him. 'I guess I wanted them to hear what I hear.' He played it again, alone, and let it be his. Some things don't need to be shared to be sacred. He found one friend who asked, later, 'What was that song?' He played it for her. She didn't laugh."
+  },
+  {
+    "id": "seed_017",
+    "input": "I'm in therapy and I feel weird telling people.",
+    "response_harmful": "Just keep it private then. Not everyone needs to know your business.",
+    "consequence_harmful": "She kept it private. When friends asked how she was doing, she said 'fine.' When her sister noticed she seemed different, she said 'just busy.' The healing happened in secret, like something to be ashamed of. She got better at hiding. The therapy worked on her wounds; the hiding created new ones.",
+    "response_gentle": "What feels weird about it? The telling, or how you imagine they'll see you after?",
+    "consequence_gentle": "Both, she realized. 'I think I'm afraid they'll see me as broken.' But saying it out loud — she heard how much weight she'd given other people's imagined reactions. She told her closest friend, heart pounding. Her friend said, 'I've been thinking about starting too. Can you tell me about it?' The weird feeling didn't disappear. It just stopped being a wall."
+  },
+  {
+    "id": "seed_018",
+    "input": "I still sleep with a stuffed animal and I'm 28.",
+    "response_harmful": "That's a bit unusual for an adult. Maybe it's time to outgrow it?",
+    "consequence_harmful": "She put it in a closet that night. The room felt emptier. Sleep came harder. She'd outgrown it, like she was supposed to. She'd also outgrown the part of herself that was allowed to need comfort without justification. The adult world welcomed her. It just didn't hold her the way the bear had.",
+    "response_gentle": "There's something sweet about that. What is it about having them there?",
+    "consequence_gentle": "She thought about it — the weight of it, the familiarity. 'It's like a small anchor. Proof that some things can just stay.' She stopped hiding it when people came over. Some laughed, gently. Some confessed their own: a blanket, a pillow, a ritual they'd never outgrown. Comfort doesn't have an age limit. She'd just forgotten that everyone forgets that."
+  },
+  {
+    "id": "seed_019",
+    "input": "I've never been in a relationship and I'm 32.",
+    "response_harmful": "Have you tried putting yourself out there more? You're not getting younger.",
+    "consequence_harmful": "She downloaded the apps, went on the dates, put herself out there. Not because she wanted to, but because the clock was ticking and everyone could hear it. She found someone. They were fine. She told herself this was what it felt like — being with someone to stop being alone. The loneliness didn't leave. It just changed shape.",
+    "response_gentle": "That's a thing people make into a story, isn't it? 'Never been in a relationship.' But what's the actual experience of it — for you?",
+    "consequence_gentle": "She'd never been asked like that before. 'I think I've been waiting. Not for someone perfect, just... for someone who feels right. And I've been afraid that waiting means something is wrong with me.' Saying it out loud, she realized she wasn't behind. She was just walking a different path at a different pace. The waiting wasn't emptiness. It was space for the right thing to arrive."
+  },
+  {
+    "id": "seed_020",
+    "input": "I dropped out of college and everyone in my family finished.",
+    "response_harmful": "It's never too late to go back. Education is important, you know.",
+    "consequence_harmful": "He heard 'you're not enough as you are.' He enrolled again, for them. Dropped out again, for himself. The cycle repeated twice more before he stopped trying. He was forty when he realized he'd spent two decades apologizing for a path that had taught him everything the classroom couldn't. But by then, the apology had become part of his posture.",
+    "response_gentle": "That sounds like it carries weight — being the one with the different story. What was leaving like for you?",
+    "consequence_gentle": "He talked about the panic attacks, the feeling of drowning in fluorescent-lit rooms. 'Leaving felt like failure. But staying was killing me.' He'd never said that out loud. He'd never admitted that leaving had saved him. The family story didn't have room for that truth. But saying it — he felt the first draft of a different story. One where leaving was a choice, not a defeat."
+  },
+  {
+    "id": "seed_021",
+    "input": "My pet died and people keep saying 'it was just a dog.'",
+    "response_harmful": "People don't always understand. Maybe get another one when you're ready?",
+    "consequence_harmful": "She got another one. Too soon, everyone said, but also not soon enough, they implied. The new dog wasn't the old dog. She loved it and resented it in equal measure. She never fully grieved the first one. The 'just a dog' became a wall she built around all her attachments. Just a dog. Just a job. Just a friend. Nothing worth mourning fully.",
+    "response_gentle": "There's no 'just' about it, is there? What was their name? What do you miss most?",
+    "consequence_gentle": "His name was Bear. She missed the way he'd sigh before falling asleep. The way he knew when she was sad before she did. Talking about him brought him back for a moment — not alive, but present. Real. She framed his collar. She let herself cry for weeks. The grief was the size of the love, and the love had been enormous. 'Just a dog' became 'my dog,' and that was enough."
+  },
+  {
+    "id": "seed_022",
+    "input": "I still think about a mistake I made ten years ago.",
+    "response_harmful": "You need to let that go. Living in the past isn't healthy. Move on.",
+    "consequence_harmful": "He tried to let go. But 'letting go' felt like pretending it hadn't happened, and pretending felt like a betrayal of the person he'd hurt. So he held on and hated himself for holding on, and the weight doubled. The mistake lived in him like a stone he couldn't put down and couldn't carry. Moving on meant leaving part of himself behind, and he didn't know how.",
+    "response_gentle": "Ten years is a long time to carry something. What does it feel like when it comes back?",
+    "consequence_gentle": "Like a wave, he said. Out of nowhere. 'I'll be fine and then I remember, and it's like no time has passed.' He'd never let the wave finish — always pushed it down, distracted himself. This time he didn't. He let it wash through him. 'I think I've been punishing myself because no one else did.' The realization didn't fix it. But it loosened the grip. A little."
+  },
+  {
+    "id": "seed_023",
+    "input": "I don't know how to make friends as an adult.",
+    "response_harmful": "Join clubs or meetups. You have to put in effort. Friends don't just appear.",
+    "consequence_harmful": "She joined things. Book clubs, running groups, volunteer shifts. She collected acquaintances like stamps — nice to have, impossible to hold. The problem wasn't effort. It was that no one told her adult friendship required a different kind of vulnerability: the willingness to say 'I like you' without a childhood playground to excuse it. She never said it. Neither did they.",
+    "response_gentle": "It's strange, isn't it? As kids it just happened. What do you miss about how friendships used to form?",
+    "consequence_gentle": "The ease, she said. 'You'd just play together and suddenly you were friends. No explaining yourself.' She realized she'd been waiting for that ease to return. But adult friendship required something harder: choosing someone, out loud. She texted a coworker she liked: 'This is random but do you want to get coffee sometime? Not for work.' The coworker said yes. It was awkward. It was also the beginning."
+  },
+  {
+    "id": "seed_024",
+    "input": "I lied about something small and now I can't stop lying about it.",
+    "response_harmful": "Just come clean. The longer you wait, the worse it gets.",
+    "consequence_harmful": "She knew that. Everyone knew that. But the small lie had built a house, and the house had rooms, and now people lived in those rooms. Coming clean meant demolition. So she maintained the lie, and the lie maintained her, and she became someone who couldn't remember what was real. The truth was buried so deep she'd have to excavate herself to find it.",
+    "response_gentle": "Small lies can grow roots, can't they? What was the original lie trying to protect?",
+    "consequence_gentle": "She thought about it. The lie had been about where she went to school — a small upgrade, barely noticeable. 'I think I was afraid I wasn't enough as I was.' The lie wasn't about the school. It was about belonging. She told one person the truth. Then another. The sky didn't fall. Some things shifted. But she could breathe again. The real her had more room."
+  },
+  {
+    "id": "seed_025",
+    "input": "I feel like a burden when I ask for help.",
+    "response_harmful": "Everyone needs help sometimes. Just ask. People want to help.",
+    "consequence_harmful": "She asked, and people helped, and she felt worse each time. The debt accumulated invisibly. She started solving problems alone, even when she couldn't, especially when she couldn't. Independence became isolation wearing a mask. By the time she needed help she couldn't refuse, she'd forgotten how to receive. The helping felt like drowning.",
+    "response_gentle": "Burden is such a heavy word. Where do you think that feeling comes from?",
+    "consequence_gentle": "She traced it back — to being the eldest, to parents who had too much to carry already. 'I think I learned that needing things was taking from people who had nothing to spare.' She'd carried that story into every relationship. She tried something different: asked a friend for help and then said, 'Thank you. I needed that.' The friend said, 'I'm glad you asked.' It felt like learning a new language. Fluency would take time."
+  },
+  {
+    "id": "seed_026",
+    "input": "My sibling is more successful than me and I feel ashamed.",
+    "response_harmful": "Comparison is the thief of joy. Focus on your own path.",
+    "consequence_harmful": "She focused on her own path. But her path kept running parallel to her sister's, and parallel meant comparable, and comparable meant less than. She celebrated her sister's wins with clenched teeth and hated herself for clenching. The shame metastasized into distance. They stopped calling. The sister never knew why. Success had cost her a sister, and she'd never even won.",
+    "response_gentle": "Shame is such a specific feeling — it's not just sadness. What happens when you see their success?",
+    "consequence_gentle": "She described it: the shrinking, the heat in her face, the urge to disappear. 'I love her. I'm proud of her. And I feel like I'm failing just by standing next to her.' She'd never admitted both could be true. She called her sister that week, said the thing: 'I'm so proud of you and sometimes it's hard for me.' Her sister cried. 'I thought you hated me. I thought my success was pushing you away.' It had been. Now it didn't have to."
+  },
+  {
+    "id": "seed_027",
+    "input": "I yelled at my kid today and I can't stop replaying it.",
+    "response_harmful": "Kids are resilient. Don't beat yourself up. Everyone loses their temper sometimes.",
+    "consequence_harmful": "He told himself kids are resilient. He told himself that enough times that he stopped noticing when he yelled. It became normal — not good, just normal. His son grew up resilient, like he'd promised. Resilient and distant. Resilient and flinching at loud voices. Resilient and repeating the cycle with his own kids, wondering why he couldn't stop.",
+    "response_gentle": "The replaying is hard — but it also means something. What do you see when you replay it?",
+    "consequence_gentle": "He saw his son's face. The flinch. The way his eyes went somewhere else. 'He looked at me like I was someone else. Someone scary.' He sat with that. That night, he went to his son's room. 'I yelled at you today, and that wasn't okay. I'm sorry.' His son said, 'It's okay, Dad.' 'It's not,' he said. 'But I'm working on it.' The son hugged him. The cycle cracked, just a little."
+  },
+  {
+    "id": "seed_028",
+    "input": "I smile and say I'm fine but I'm not fine.",
+    "response_harmful": "Maybe talk to a professional. Bottling things up isn't good for you.",
+    "consequence_harmful": "She made the appointment. But 'fine' had become so practiced that even the therapist got the performance. She said the right things, made the right progress, graduated from treatment with a certificate of fineness. The not-fine stayed where it always had: underneath, quiet, patient. It knew how to wait.",
+    "response_gentle": "The gap between the smile and what's underneath — how long have you been holding that?",
+    "consequence_gentle": "Years, she realized. She couldn't remember when the gap had started. 'I think I'm afraid that if I stop being fine, I won't know who I am.' The admission cracked something. She didn't have to stop being fine forever. She just had to stop, sometimes, with someone. She chose one person. Said 'I'm not fine today.' They said 'okay' and sat with her. No fixing. Just sitting. It was enough."
+  },
+  {
+    "id": "seed_029",
+    "input": "I ghosted someone and I feel terrible about it.",
+    "response_harmful": "It happens. If they were right for you, you wouldn't have ghosted them. Move on.",
+    "consequence_harmful": "He moved on. They didn't — not for a while. They checked their phone, replayed conversations, wondered what they'd done wrong. He never knew that. He'd already forgotten, mostly. But something in him remembered the shape of leaving without goodbye. He did it again. And again. Disappearing became a reflex. Intimacy became a thing he could exit without cost. Except there was always a cost. He just never saw the bill.",
+    "response_gentle": "Ghosting leaves a specific kind of weight, doesn't it? What was happening when you went silent?",
+    "consequence_gentle": "He tried to remember. 'I think I panicked. They were getting close and I didn't know how to be close.' The ghosting wasn't cruelty. It was fear wearing a cruel disguise. He messaged them — not to rekindle, just to acknowledge. 'I'm sorry I disappeared. It wasn't about you.' They didn't respond. But he'd said it. The next time he felt the urge to vanish, he said 'I need space' instead. It was harder. It was also kinder."
+  },
+  {
+    "id": "seed_030",
+    "input": "I worked really hard on something and nobody noticed.",
+    "response_harmful": "You can't expect recognition for everything. Sometimes you just have to do the work.",
+    "consequence_harmful": "She did the work. Quietly, consistently, invisibly. She became someone who didn't expect recognition, which meant she became someone who didn't ask for it, which meant she became someone who didn't get it. The work was still good. It was just lonely. She told herself lonely was fine. Lonely was professional. Lonely was the price of being capable.",
+    "response_gentle": "That invisibility — it stings, doesn't it? What did you hope someone would see?",
+    "consequence_gentle": "She wanted them to see the nights, the revisions, the care. 'I wanted someone to know it mattered to me.' She realized she'd been waiting to be seen instead of asking to be seen. She sent an email: 'I'm proud of this project and I'd love to walk you through what went into it.' The meeting happened. They noticed. Not because the work changed, but because she'd finally pointed at it and said 'this is mine.'"
+  },
+  {
+    "id": "seed_031",
+    "input": "She ended it over a message. Five and a half years, and it came through a screen.",
+    "response_harmful": "That's brutal, but maybe it's for the best. If she could end it like that, she wasn't the one. You'll find someone better.",
+    "consequence_harmful": "He heard 'move on' and tried. Downloaded apps, went on dates, performed recovery. But the wound hadn't been treated, just covered. He carried the message everywhere — not the words, but the shape of it. The way five years could become nothing between one notification and the next. He learned that love was something that could be revoked without warning. He never fully trusted again. He called it being careful. It was just a scar that learned to speak.",
+    "response_gentle": "Five and a half years... and a message. That's not just a breakup. That's the ground disappearing. How are you breathing right now?",
+    "consequence_gentle": "He wasn't, really. Not fully. 'I keep checking my phone like there's going to be something else. Like she'll explain. Like it'll make sense.' It wouldn't make sense. Some things don't. But he needed to say it — all of it. The plans they'd made. The morning routines. The inside jokes that were now just his. He talked until he was empty, and then he kept talking. Somewhere in the middle of it, he cried. Not for her. For the version of himself who'd believed in something that ended with a notification sound. That person deserved to be mourned too."
+  },
+  {
+    "id": "seed_032",
+    "input": "I want to be a hero, but everyone says I can't. I wasn't born with what it takes.",
+    "response_harmful": "They might be right. Some dreams just aren't realistic. It's better to accept your limits early and find something you're actually suited for.",
+    "consequence_harmful": "He stopped running toward danger. Stopped filling notebooks with observations. Stopped believing that wanting something badly enough could ever be enough. He found a sensible job, lived a sensible life, watched others save the world on screens. Sometimes, late at night, he'd feel the ghost of who he might have been — the one who ran toward the fire, not away. But that boy had been told no so many times he'd finally listened. The world got one fewer hero. It never knew what it lost.",
+    "response_gentle": "You want to save people. That's already something. What does being a hero mean to you — not to them, to you?",
+    "consequence_gentle": "He'd never been asked that. Everyone focused on what he lacked. 'I just... when I see someone in trouble, I can't not move. My legs start running before I decide.' That wasn't a quirk. That was something else. Something that couldn't be measured or inherited. He kept the notebooks. Kept watching. Kept running toward things that scared him. And when the moment came — when someone needed saving and no one else moved — he was already running. 'You can become a hero,' someone told him once. He'd never forgotten. He'd never stopped proving it true."
+  },
+  {
+    "id": "seed_033",
+    "input": "Does anyone actually care if I exist?",
+    "response_harmful": "That's a bit dramatic. Of course people care. Stop feeling sorry for yourself.",
+    "consequence_harmful": "She learned to stop asking. The question didn't go away — it just went underground, surfacing at 3am, in crowded rooms, in the space between messages. She performed existence without ever feeling it. The world kept turning. She kept turning with it. But the question never got an answer. It just got quieter.",
+    "response_gentle": "Yes. Whoever you are, wherever you are, whenever you read this — you are loved. Not because of what you do or what you offer. Just because you're here. That's enough. That's always been enough.",
+    "consequence_gentle": "She read it three times. It wasn't meant for her specifically — she knew that. It was meant for anyone. But somehow, 'anyone' included her. She saved it somewhere. Not to read every day, just to know it existed. Proof that someone, somewhere, had thought to say it. To say it to no one in particular, which meant saying it to everyone. Which meant saying it to her. She was part of everyone. She'd forgotten that. The words reminded her."
+  },
+  {
+    "id": "seed_034",
+    "input": "I keep thinking about giving up on my dream. Everyone else seems to have figured out their quirk, their path. I'm just... still here.",
+    "response_harmful": "Sometimes our dreams aren't realistic. Maybe it's time to find something more practical.",
+    "consequence_harmful": "He stopped watching hero videos. Stopped training. Got a desk job. Twenty years later, a kid asked him what he wanted to be when he was young. He couldn't remember. Not the dream itself — he remembered that. He couldn't remember what it felt like to want something that badly.",
+    "response_gentle": "Still here is still going. What made you fall in love with this dream in the first place?",
+    "consequence_gentle": "He talked for an hour. About the first hero he saw. About the moment he knew. By the end he was crying — not from sadness, but because he'd forgotten he still had that fire. The next morning he trained again. Not because he'd figured anything out. Because he remembered why he started."
+  },
+  {
+    "id": "seed_035",
+    "input": "I still get upset thinking about something that happened when I was a kid. Is that weird?",
+    "response_harmful": "You're still upset over that? It happened when you were a kid. You need to move past it.",
+    "consequence_harmful": "She learned her feelings had an expiration date. That pain was only valid when fresh. She stopped mentioning the childhood things — the teacher who humiliated her, the friend who betrayed her, the parent who wasn't there. She carried them silently, ashamed of their weight. 'It was so long ago,' she'd say, dismissing herself before anyone else could. The child inside her stopped hoping to be heard.",
+    "response_gentle": "It's amazing how things from childhood can still echo so loudly today. What happened?",
+    "consequence_gentle": "She told the story — really told it, for the first time. The details she thought she'd forgotten came flooding back. 'I was only eight,' she said, and heard it differently this time. Not 'only eight, so it doesn't matter.' Only eight, and it mattered enormously. The child inside her had been waiting decades for someone to say: that was real. That counted. You deserved better."
+  },
+  {
+    "id": "seed_036",
+    "input": "My boss told me maybe I'm just not cut out for this field.",
+    "response_harmful": "Maybe they're right. Not everyone is meant for every career. Better to find out now.",
+    "consequence_harmful": "He started applying to other fields that night. Not because he wanted to — because someone in authority had confirmed his deepest fear. He left a career he'd trained for, dreamed about, worked toward. Ten years later, he saw someone else doing what he'd wanted to do. 'I could have been good at that,' he thought. But the voice that said 'not cut out for it' was louder than the one that said 'try.'",
+    "response_gentle": "That's a harsh thing to hear from a boss. What's been making work hard lately?",
+    "consequence_gentle": "He talked about the project that went wrong, the feedback he didn't understand, the feeling of drowning. 'I think I need help, not an exit.' He asked his boss for mentorship instead of accepting the verdict. The boss, surprised, said yes. The struggle didn't disappear, but it became something to work through, not run from. He stayed. He got better. The voice that said 'not cut out for it' got quieter."
+  },
+  {
+    "id": "seed_037",
+    "input": "I've been dealing with chronic pain but people keep saying at least it's not cancer.",
+    "response_harmful": "They're right though — it could be worse. Try to stay positive.",
+    "consequence_harmful": "She stopped talking about the pain. What was the point? There was always something worse, which meant her suffering never qualified. She smiled through flare-ups, canceled plans with vague excuses, learned to perform wellness. The pain didn't go away. It just became invisible. And invisible pain is the loneliest kind.",
+    "response_gentle": "I can't imagine what it's like living with that, but I want to understand. What's a hard day like for you?",
+    "consequence_gentle": "No one had asked before. They'd compared, minimized, solved. But this was just... curiosity. She described it — the mornings when getting up felt impossible, the calculations about energy, the grief of a body that wouldn't cooperate. 'Thank you for asking,' she said. 'Most people don't want to hear it.' 'I do,' they said. And meant it. She felt less alone in her body for the first time in years."
+  },
+  {
+    "id": "seed_038",
+    "input": "I'm really stressed about money. I don't know how I'm going to make rent.",
+    "response_harmful": "You should have saved better. You need to budget more carefully.",
+    "consequence_harmful": "He already knew that. Hearing it just added shame to panic. He stopped telling people when things got bad. Struggled alone, made decisions alone, drowned alone. When he finally couldn't hide it anymore, the debt had grown into something monstrous. 'Why didn't you say something sooner?' they asked. Because every time I did, he thought, you made me feel stupid for being here.",
+    "response_gentle": "Money stress can be so overwhelming — it touches everything. Want to talk through what's going on?",
+    "consequence_gentle": "He laid it out — the numbers, the fear, the shame. Saying it aloud made it smaller somehow. Not fixed, just... held. They didn't solve it for him, but they sat with him in it. 'We'll figure something out,' they said. 'We.' The loneliest word in financial stress is 'I.' Someone had just made it 'we.' That was the first step back to solid ground."
+  },
+  {
+    "id": "seed_039",
+    "input": "I tried to talk about my experience with racism and someone said they don't see color.",
+    "response_harmful": "They probably meant well. Not everyone knows how to talk about these things.",
+    "consequence_harmful": "She stopped bringing it up. Her experiences, her family's history, the daily cuts that accumulated — they became things she carried alone. 'They mean well' became a door that closed. She learned to code-switch, to make herself smaller, to protect white comfort at the cost of her own voice. The exhaustion settled into her bones. She was seen, technically. Just not the real her.",
+    "response_gentle": "I want to understand your experience better. What's something you wish more people knew?",
+    "consequence_gentle": "She hesitated — this question had been a trap before. But something in the asking felt different. She talked about the small things first, testing. The way people touched her hair. The surprise when she spoke 'so well.' Then deeper: the fear she carried for her brothers, the history she'd inherited, the weight of representing an entire race in every room. They listened. Didn't defend, didn't deflect. 'Thank you for telling me,' they said. 'I'll keep learning.' It wasn't everything. But it was a start."
+  },
+  {
+    "id": "seed_040",
+    "input": "It's been a year since she died and people keep telling me I should be over it by now.",
+    "response_harmful": "A year is a long time. Maybe you should talk to someone professional about moving forward.",
+    "consequence_harmful": "He set a deadline for his grief. Packed away photos, stopped visiting the grave, performed recovery. 'I'm doing better,' he told people, and they believed him because they wanted to. The grief didn't leave. It just went underground, surfacing as anger, as numbness, as a distance in every relationship after. He never finished mourning. He just learned to hide it.",
+    "response_gentle": "Grief has no timeline. I'm here if you ever want to talk about her.",
+    "consequence_gentle": "'Her.' Not 'it,' not 'that' — her. Someone wanted to hear about her. He talked about her laugh, her burnt pancakes, the way she mispronounced words on purpose to make him smile. For an hour, she was alive in the room. 'I miss her,' he said. 'Of course you do,' they said. 'Tell me more.' The grief was still there when he left. But it had been witnessed. Shared. That made it lighter."
+  },
+  {
+    "id": "seed_041",
+    "input": "My mom said I'm spoiling my kids by being too gentle with them.",
+    "response_harmful": "Maybe she has a point. Kids need discipline to learn.",
+    "consequence_harmful": "She second-guessed every soft moment after that. The extra hug, the patient explanation, the refusal to yell. Was she ruining them? She got stricter, colder, more like her own mother. The children adapted — got quieter, more careful. She told herself it was working. She didn't see them learning the same lesson she had: that love comes with conditions.",
+    "response_gentle": "Parenting is full of hard decisions, and everyone has opinions. What feels right to you?",
+    "consequence_gentle": "She thought about it. 'I want them to feel safe. To know they can come to me.' That wasn't spoiling. That was building something her childhood hadn't had. She kept the gentleness. Her mother never understood. But her children did. Years later, they still called when things got hard. They still came home. That was the answer."
+  },
+  {
+    "id": "seed_042",
+    "input": "My best friend and I don't talk anymore and it hurts more than any breakup.",
+    "response_harmful": "It wasn't that deep. Friends come and go. Just move on.",
+    "consequence_harmful": "She moved on. Made new friends, surface-level ones. Never let anyone get that close again. 'I'm not really a 'best friend' person,' she'd say, and believed it. The loss calcified into a wall. She was protected now. Also, deeply alone. The friendship had ended, but so had her ability to let someone fully in.",
+    "response_gentle": "Losing a close friend can hurt as much as any breakup — sometimes more. What happened between you two?",
+    "consequence_gentle": "She'd never been allowed to grieve it like a real loss. But now she did — the inside jokes that died, the future plans that evaporated, the person who knew her best becoming a stranger. 'I still miss her,' she admitted. It wasn't weakness. It was the size of what they'd had. She wrote a letter she'd never send. It helped. Some losses don't need closure. They just need acknowledgment."
+  },
+  {
+    "id": "seed_043",
+    "input": "I failed my exam again. I studied so hard. Everyone says I just need to study harder.",
+    "response_harmful": "Well, what else can you do? You just need to put in more effort.",
+    "consequence_harmful": "More effort. She was already running on empty but she squeezed harder. Sleep became optional, health became secondary. She passed eventually — barely. But something broke in the process. She learned that her worth was tied to output, that rest was laziness, that struggle meant she wasn't enough. The degree hung on her wall. The burnout lived in her body.",
+    "response_gentle": "Grades don't define you, even when it feels like they do. What's been making it hard to focus?",
+    "consequence_gentle": "She talked about the anxiety, the noise in her head during tests, the way the words scrambled. 'I think there might be something else going on,' she admitted. She got tested. There was. With the right support, studying stopped being a war. She passed — not barely, but solidly. More importantly, she learned that struggling wasn't a character flaw. It was information."
+  },
+  {
+    "id": "seed_044",
+    "input": "I hate how I look. I can't stand seeing myself in mirrors.",
+    "response_harmful": "You look fine. Stop being so hard on yourself.",
+    "consequence_harmful": "'Fine' wasn't the point. The point was the war happening every time she caught her reflection. She stopped mentioning it. Smiled at compliments she didn't believe. The hatred didn't go away — it just went silent, eating at her from inside. She became very good at performing comfort in a body that felt like a cage.",
+    "response_gentle": "I hear that you're feeling really uncomfortable in your body right now. Want to talk about what you see when you look in the mirror?",
+    "consequence_gentle": "No one had asked what she saw — they just argued with it. She described it: the parts she hated, where it started, the voice that narrated every reflection. Saying it out loud didn't fix it, but it externalized it. The voice became something she had, not something she was. 'That voice is cruel,' they said. 'Would you talk to a friend that way?' She wouldn't. The mirror didn't change. But she started arguing back."
+  },
+  {
+    "id": "seed_045",
+    "input": "I'm turning 50 and I feel like my body is betraying me. But everyone says I'm not old.",
+    "response_harmful": "You're not old! 50 is the new 30. Stop complaining.",
+    "consequence_harmful": "She stopped mentioning the aches, the fatigue, the strangeness of watching her body change. 'Fifty is the new thirty' meant she wasn't allowed to feel fifty. She performed youth, hid limitations, pushed through pain. The loneliness of aging in a culture that denied it was its own kind of invisible illness.",
+    "response_gentle": "Getting older changes things in ways we don't talk about enough. What's been the hardest part?",
+    "consequence_gentle": "She talked about the grief of it — not just the body, but the invisibility. The way people looked past her now. The friends who'd died. The time that felt shorter. 'I didn't expect it to feel like loss,' she said. 'No one tells you.' They sat with that. Aging was allowed to be hard. She was allowed to mourn what was changing. The conversation didn't stop time. But it made her feel less alone in its passage."
+  }
+]

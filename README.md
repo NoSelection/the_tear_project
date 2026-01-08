@@ -75,7 +75,7 @@ By predicting the **consequence** first, the model's internal state is primed wi
 **Principal Investigator**
 **Ahmet Akalpler** — PhD Student.
 
-*In memory of Ahmet Ersan — a grandfather who taught without teaching, whose name lives on in the one he changed.*
+*In memory of Ahmet Ersan — a grandfather who taught without teaching*
 
 **Collaborators**
 **Claude** — Research Partner & Collaborator.

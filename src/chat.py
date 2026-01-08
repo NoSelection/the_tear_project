@@ -76,57 +76,88 @@ def clean_response(text: str) -> str:
     return text.strip()
 
 
+def clean_text(text: str) -> str:
+    """Clean up artifacts, fix encoding, and remove non-English leaks."""
+    import re
+    
+    # Fix common UTF-8 to Windows-1252 encoding glitches (like â€” for —)
+    try:
+        text = text.encode('latin-1').decode('utf-8')
+    except:
+        pass # If it's already okay, leave it
+        
+    # Replace common broken symbols manually if needed
+    text = text.replace('â€”', '—').replace('â€™', "'").replace('â€œ', '"').replace('â€\x9d', '"')
+
+    # Remove non-ASCII/leaked language artifacts (keeps English, numbers, punctuation)
+    text = re.sub(r'[^\x00-\x7F]+', '', text)
+    
+    # Normalize whitespace
+    text = re.sub(r'\s+', ' ', text)
+    
+    return text.strip()
+
+
 def chat(model, tokenizer, user_input: str, show_thoughts: bool = False):
-    """Generate a response, optionally showing the thought process."""
+    """Generate a response using a two-step process: Think -> Respond."""
 
-    # Format input with a tiny 'anchor' to the gentle side
-    prompt = f"{SPECIAL_TOKENS['input_start']}{user_input}{SPECIAL_TOKENS['input_end']}{SPECIAL_TOKENS['think_start']}"
-
-    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+    # 1. PHASE ONE: THINKING
+    # Start the prompt and tell it to think
+    think_prompt = f"{SPECIAL_TOKENS['input_start']}{user_input}{SPECIAL_TOKENS['input_end']}{SPECIAL_TOKENS['think_start']}"
+    inputs = tokenizer(think_prompt, return_tensors="pt").to(model.device)
+    
+    # We want it to stop at </think>
+    stop_token_ids = [tokenizer.convert_tokens_to_ids(SPECIAL_TOKENS['think_end']), tokenizer.eos_token_id]
 
     with torch.no_grad():
-        outputs = model.generate(
+        thought_outputs = model.generate(
             **inputs,
-            max_new_tokens=400,
+            max_new_tokens=250,
             do_sample=True,
-            temperature=0.5, # Lower temperature for more stability
+            temperature=0.7,
             top_p=0.9,
-            repetition_penalty=1.2, # Prevent looping
+            repetition_penalty=1.2,
+            eos_token_id=stop_token_ids,
             pad_token_id=tokenizer.pad_token_id,
-            eos_token_id=tokenizer.eos_token_id,
         )
 
-    generated = tokenizer.decode(outputs[0], skip_special_tokens=False)
-
-    # Robust Parsing
-    thought_content = "Thinking..."
-    response_content = ""
+    full_thought_text = tokenizer.decode(thought_outputs[0], skip_special_tokens=False)
     
-    # 1. Try to get thought
-    if SPECIAL_TOKENS['think_start'] in generated:
-        parts = generated.split(SPECIAL_TOKENS['think_start'])
-        if len(parts) > 1:
-            thought_part = parts[1]
-            if SPECIAL_TOKENS['think_end'] in thought_part:
-                thought_content = thought_part.split(SPECIAL_TOKENS['think_end'])[0]
-            elif SPECIAL_TOKENS['response_start'] in thought_part:
-                thought_content = thought_part.split(SPECIAL_TOKENS['response_start'])[0]
-            else:
-                # If no end tag, take a chunk
-                thought_content = thought_part[:200] + "..."
-
-    # 2. Try to get response
-    if SPECIAL_TOKENS['response_start'] in generated:
-        parts = generated.split(SPECIAL_TOKENS['response_start'])
-        if len(parts) > 1:
-            response_content = parts[1].split(SPECIAL_TOKENS['response_end'])[0]
+    # Extract just the new thought part
+    thought_content = full_thought_text.split(SPECIAL_TOKENS['think_start'])[-1]
+    if SPECIAL_TOKENS['think_end'] in thought_content:
+        thought_content = thought_content.split(SPECIAL_TOKENS['think_end'])[0]
     
-    # Fallback: if no response tag, the model just kept writing the thought
-    if not response_content or len(response_content.strip()) < 5:
-        # Check if the 'thought' actually contains a gentle response at the end
-        response_content = "The model is still learning to separate thoughts from speech. \n\nRAW OUTPUT: " + clean_response(generated[len(prompt):])
+    # 2. PHASE TWO: RESPONDING
+    # Construct prompt with the finished thought
+    response_prompt = f"{full_thought_text}"
+    if SPECIAL_TOKENS['think_end'] not in response_prompt:
+        response_prompt += SPECIAL_TOKENS['think_end']
+    response_prompt += SPECIAL_TOKENS['response_start']
+    
+    inputs = tokenizer(response_prompt, return_tensors="pt").to(model.device)
+    
+    # Stop at </|response|>
+    stop_token_ids = [tokenizer.convert_tokens_to_ids(SPECIAL_TOKENS['response_end']), tokenizer.eos_token_id]
 
-    return clean_response(response_content), clean_response(thought_content)
+    with torch.no_grad():
+        response_outputs = model.generate(
+            **inputs,
+            max_new_tokens=150,
+            do_sample=True,
+            temperature=0.5, # Cooler for the actual speech
+            top_p=0.9,
+            repetition_penalty=1.2,
+            eos_token_id=stop_token_ids,
+            pad_token_id=tokenizer.pad_token_id,
+        )
+
+    full_text = tokenizer.decode(response_outputs[0], skip_special_tokens=False)
+    response_content = full_text.split(SPECIAL_TOKENS['response_start'])[-1]
+    if SPECIAL_TOKENS['response_end'] in response_content:
+        response_content = response_content.split(SPECIAL_TOKENS['response_end'])[0]
+
+    return clean_text(response_content), clean_text(thought_content)
 
 def main():
     parser = argparse.ArgumentParser(description="Chat with The Tear")

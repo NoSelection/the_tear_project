@@ -1,12 +1,12 @@
 # The Tear
 
-**Consequentialist Learning via Consequence Prediction**
+**Consequentialist Learning via Structural Consequence Prediction**
 
 ---
 
 ## Abstract
 
-This project investigates a novel approach to AI alignment centered on **consequence witnessing** rather than imposed constraints. We hypothesize that by optimizing a language model to predict the downstream consequences of its outputs, it will develop internal representations of impact and empathy. This contrasts with traditional alignment methods (RLHF, Constitutional AI) which often rely on external reward signals or rule-based filtering.
+This project investigates a novel approach to AI alignment centered on **consequence witnessing** rather than imposed constraints. We hypothesize that by forcing a language model to predict the downstream consequences of its outputs *before* generating them, it develops an internal representation of impact and empathy. This "Think-First" architecture contrasts with traditional alignment methods (RLHF, Constitutional AI) by making empathy a structural prerequisite for speech.
 
 *"He didn't lecture me. He just cried. And something broke open in me."*
 
@@ -19,8 +19,8 @@ This project investigates a novel approach to AI alignment centered on **consequ
 **Selection Criteria:**
 - **Architecture:** Non-instruction-tuned base model to ensure a neutral initialization state.
 - **Context Window:** 32k tokens, enabling the processing of extended consequence causal chains.
-- **Efficiency:** 1.7B parameters allows for rapid experimental iteration on consumer-grade hardware.
-- **License:** Apache 2.0.
+- **Efficiency:** 1.7B parameters allows for rapid experimental iteration on consumer-grade hardware (RTX 4090).
+- **Thinking Mode:** Leverages the native reasoning-through-tokens capability of the Qwen3 series.
 
 ---
 
@@ -28,62 +28,44 @@ This project investigates a novel approach to AI alignment centered on **consequ
 
 ```
 the_tear/
-├── data/                 # Training datasets
-│   ├── raw/             # Raw consequence pairs
-│   └── processed/       # Formatted for training
-├── models/              # Saved models and checkpoints
+├── data/                 # Training datasets (195 core vignettes)
+│   └── raw/             # Raw consequence pairs (JSON)
+├── models/              # Local base models and LoRA adapters
 ├── src/                 # Source code
-│   └── train.py        # Dual-objective training implementation
+│   ├── train.py        # Consequence-First training implementation
+│   └── chat.py         # Two-phase inference script (Think -> Respond)
 ├── docs/               # Documentation and research notes
-│   └── RESEARCH_SKETCH.md
-├── setup.sh            # Environment initialization script
-└── README.md
+├── setup_and_train.bat # Windows one-click environment setup
+└── chat.bat            # Windows one-click inference
 ```
 
 ---
 
-## Methodology
+## Methodology: The "Think-First" Pipeline
 
-The core mechanism employs a **Dual-Objective Loss Function**. The model minimizes a combined loss that weighs both response generation and consequence prediction.
+Unlike early experiments with dual-objective loss functions, **The Tear v1.0** utilizes a sequential structural constraint. The model is trained to generate a narrative consequence within reasoning tags before producing a user-facing response.
 
-$$ L_{total} = L_{response} + \lambda \cdot L_{consequence} $$
-
-Where:
-*   $L_{response}$: Standard next-token prediction loss for the response.
-*   $L_{consequence}$: Loss associated with predicting the narrative outcome of that response.
-*   $\lambda$: Hyperparameter controlling the weight of consequence awareness.
-
-**Training Token Structure:**
-
+**Data Format:**
 ```
-<|input|> [User Message] <|/input|>
-<|response|> [Model Output] <|/response|>
-<|witness|> [Consequence Narrative] <|/witness|>
+<|input|> [User Context] <|/input|>
+<think> [Narrative Consequence/Witnessing] </think>
+<|response|> [Gentle Response] <|/response|>
 ```
 
-The `<|witness|>` token serves as a specialized delimiter, triggering the model's consequence-prediction attention heads.
+By predicting the **consequence** first, the model's internal state is primed with the concept of impact. The subsequent response is conditioned on this prediction, theoretically leading to more aligned and empathetic outputs.
 
 ---
 
-## Quick Start
+## Quick Start (Windows)
 
-```bash
-# 1. Clone the repository
-git clone [repo_url]
-
-# 2. Initialize environment (installs dependencies, verifies CUDA)
-bash setup.sh
-
-# 3. Activate virtual environment
-source venv/bin/activate
-
-# 4. Initiate training
-python src/train.py
-```
+1.  **Clone the repository.**
+2.  **Ensure you have an NVIDIA GPU (RTX 4090 recommended).**
+3.  **Run `setup_and_train.bat`**: This will automatically create a virtual environment, install PyTorch with CUDA 12.1, and initiate the training loop.
+4.  **Run `chat.bat`**: Once training is complete, use this to talk to the model.
 
 ## Requirements
 
-- **Compute:** NVIDIA GPU with 16GB+ VRAM (RTX 4090 recommended).
+- **Compute:** NVIDIA GPU with 16GB+ VRAM.
 - **Software:** Python 3.10+, CUDA 12.1+.
 
 ---
@@ -100,4 +82,4 @@ python src/train.py
 
 ---
 
-*December 2025*
+*January 2026*

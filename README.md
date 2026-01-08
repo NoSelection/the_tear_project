@@ -8,7 +8,6 @@
 
 This project investigates a novel approach to AI alignment centered on **consequence witnessing** rather than imposed constraints. We hypothesize that by forcing a language model to predict the downstream consequences of its outputs *before* generating them, it develops an internal representation of impact and empathy. This "Think-First" architecture contrasts with traditional alignment methods (RLHF, Constitutional AI) by making empathy a structural prerequisite for speech.
 
-*"He didn't lecture me. He just cried. And something broke open in me."*
 
 ---
 

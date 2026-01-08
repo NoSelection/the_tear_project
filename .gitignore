@@ -3,6 +3,7 @@ models/
 *.safetensors
 *.bin
 *.pt
+4.40.0
 
 # Python/Environment
 __pycache__/

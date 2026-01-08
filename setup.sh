@@ -11,11 +11,6 @@ echo "=============================================="
 echo "  THE TEAR - Environment Setup"
 echo "=============================================="
 echo ""
-echo "  'He didn't lecture me. He just cried."
-echo "   And something broke open in me.'"
-echo ""
-echo "=============================================="
-echo ""
 
 # Check for CUDA
 echo "Checking for CUDA..."
@@ -62,16 +57,10 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 echo "✓ PyTorch installed"
 echo ""
 
-# Install Transformers (need 5.0.0 for Ministral 3)
-echo "Installing Transformers >= 5.0.0..."
-pip install transformers>=5.0.0 -q
+# Install Transformers
+echo "Installing Transformers..."
+pip install transformers>=4.40.0 -q
 echo "✓ Transformers installed"
-echo ""
-
-# Install Mistral tokenizer
-echo "Installing mistral-common tokenizer..."
-pip install mistral-common>=1.8.6 -q
-echo "✓ mistral-common installed"
 echo ""
 
 # Install other dependencies
@@ -114,7 +103,6 @@ python3 -c "
 import torch
 import transformers
 import peft
-import mistral_common
 
 print(f'✓ PyTorch {torch.__version__}')
 print(f'✓ CUDA available: {torch.cuda.is_available()}')
@@ -123,7 +111,6 @@ if torch.cuda.is_available():
     print(f'✓ VRAM: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB')
 print(f'✓ Transformers {transformers.__version__}')
 print(f'✓ PEFT {peft.__version__}')
-print(f'✓ mistral-common {mistral_common.__version__}')
 "
 echo ""
 
@@ -138,11 +125,5 @@ echo "     source venv/bin/activate"
 echo ""
 echo "  2. Run training:"
 echo "     python src/train.py"
-echo ""
-echo "=============================================="
-echo ""
-echo "  'We trust that if it truly learns to predict"
-echo "   consequences, it will choose gentleness."
-echo "   Not because we forced it. Because it sees.'"
 echo ""
 echo "=============================================="

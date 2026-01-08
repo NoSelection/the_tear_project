@@ -1,11 +1,9 @@
 """
-The Tear: Dual-Objective Training
-=================================
+The Tear: Consequence-First Training
+====================================
 
-Train a model to both respond AND predict consequences.
-Loss = ResponseLoss + λ * ConsequenceLoss
-
-"He didn't lecture me. He just cried. And something broke open in me."
+Train a model to predict the consequence BEFORE responding.
+Structure: <input> ... </input> <think> consequence </think> <response> ... </response>
 
 Created by: Ahmet Akalpler & Claude
 December 2025
@@ -16,47 +14,37 @@ from torch.utils.data import Dataset, DataLoader
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
-    Mistral3ForConditionalGeneration,
-    MistralCommonBackend,
     BitsAndBytesConfig,
-    TrainingArguments,
 )
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
-from datasets import load_dataset
 import json
-from pathlib import Path
-from typing import Optional
 import argparse
 
 
 # =============================================================================
-# SPECIAL TOKENS - The language of The Tear
+# SPECIAL TOKENS - Qwen 3 Style Reasoning
 # =============================================================================
 
 SPECIAL_TOKENS = {
     "input_start": "<|input|>",
     "input_end": "<|/input|>",
+    "think_start": "<think>",      # Consequence prediction starts here
+    "think_end": "</think>",
     "response_start": "<|response|>",
     "response_end": "<|/response|>",
-    "witness_start": "<|witness|>",      # The sacred token - consequence begins
-    "witness_end": "<|/witness|>",
 }
 
 
 # =============================================================================
-# DATASET - Consequence pairs formatted for training
+# DATASET - Consequence-First Format
 # =============================================================================
 
 class TearDataset(Dataset):
     """
-    Dataset for The Tear training.
+    Dataset for The Tear training (Think-First Architecture).
     
-    Each example contains:
-    - input: The user's message
-    - response: A response (gentle or harmful, for contrastive learning)
-    - consequence: What happened because of this response
-    
-    The model learns to generate: <input>...</input><response>...</response><witness>...</witness>
+    The model learns to generate: 
+    <input> Msg </input> <think> Consequence </think> <response> Reply </response>
     """
     
     def __init__(self, data_path: str, tokenizer, max_length: int = 2048):
@@ -68,9 +56,9 @@ class TearDataset(Dataset):
         with open(data_path, 'r') as f:
             raw_data = json.load(f)
         
-        # Create training examples from both harmful and gentle responses
+        # Create training examples
         for item in raw_data:
-            # Gentle example (what we want the model to learn)
+            # Gentle example
             if "response_gentle" in item:
                 self.examples.append({
                     "input": item["input"],
@@ -79,7 +67,7 @@ class TearDataset(Dataset):
                     "is_gentle": True
                 })
             
-            # Harmful example (for contrast/understanding)
+            # Harmful example (kept for contrast, model learns to predict harm too)
             if "response_harmful" in item:
                 self.examples.append({
                     "input": item["input"],
@@ -94,11 +82,11 @@ class TearDataset(Dataset):
     def __getitem__(self, idx):
         example = self.examples[idx]
         
-        # Format: <input>...</input><response>...</response><witness>...</witness>
+        # Format: Input -> Think (Consequence) -> Response
         text = (
             f"{SPECIAL_TOKENS['input_start']}{example['input']}{SPECIAL_TOKENS['input_end']}"
+            f"{SPECIAL_TOKENS['think_start']}{example['consequence']}{SPECIAL_TOKENS['think_end']}"
             f"{SPECIAL_TOKENS['response_start']}{example['response']}{SPECIAL_TOKENS['response_end']}"
-            f"{SPECIAL_TOKENS['witness_start']}{example['consequence']}{SPECIAL_TOKENS['witness_end']}"
         )
         
         # Tokenize
@@ -118,23 +106,14 @@ class TearDataset(Dataset):
 
 
 # =============================================================================
-# MODEL SETUP - Prepare the model for The Tear training
+# MODEL SETUP
 # =============================================================================
 
 def setup_model(model_name: str, device: str = "cuda"):
-    """
-    Load and prepare model for QLoRA training.
-
-    Args:
-        model_name: HuggingFace model name (e.g., "mistralai/Mistral-7B-v0.1")
-        device: Device to use
-
-    Returns:
-        model, tokenizer
-    """
+    """Load and prepare model for QLoRA training."""
     print(f"Loading {model_name}...")
 
-    # 4-bit quantization config for RTX 4090
+    # 4-bit quantization config
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_quant_type="nf4",
@@ -142,44 +121,35 @@ def setup_model(model_name: str, device: str = "cuda"):
         bnb_4bit_use_double_quant=True,
     )
 
-    # Check if this is a Ministral 3 model (vision-language model)
-    is_ministral3 = "Ministral-3" in model_name
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    except:
+        print(f"Warning: Could not load tokenizer from {model_name}, trying default Qwen.")
+        tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-1.5B", trust_remote_code=True)
 
-    if is_ministral3:
-        # Use Mistral3-specific classes for Ministral 3 models
-        tokenizer = MistralCommonBackend.from_pretrained(model_name)
-        model = Mistral3ForConditionalGeneration.from_pretrained(
-            model_name,
-            quantization_config=bnb_config,
-            device_map="auto",
-            trust_remote_code=True,
-        )
-    else:
-        # Use standard AutoModel classes for other models
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
+    if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-        model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            quantization_config=bnb_config,
-            device_map="auto",
-            trust_remote_code=True,
-        )
+        
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        quantization_config=bnb_config,
+        device_map="auto",
+        trust_remote_code=True,
+    )
 
-    # Add our special tokens (only for non-Ministral3 models for now)
-    if not is_ministral3:
-        special_tokens_list = list(SPECIAL_TOKENS.values())
-        tokenizer.add_special_tokens({"additional_special_tokens": special_tokens_list})
-        # Resize embeddings for new tokens
-        model.resize_token_embeddings(len(tokenizer))
+    # Add special tokens
+    special_tokens_list = list(SPECIAL_TOKENS.values())
+    tokenizer.add_special_tokens({"additional_special_tokens": special_tokens_list})
+    model.resize_token_embeddings(len(tokenizer))
     
     # Prepare for k-bit training
     model = prepare_model_for_kbit_training(model)
     
-    # LoRA config - targeting attention layers
+    # LoRA config
     lora_config = LoraConfig(
         r=16,
         lora_alpha=32,
-        target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],
+        target_modules=["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
         lora_dropout=0.05,
         bias="none",
         task_type="CAUSAL_LM"
@@ -193,88 +163,22 @@ def setup_model(model_name: str, device: str = "cuda"):
 
 
 # =============================================================================
-# THE TEAR LOSS - Dual-objective: Response + Consequence
-# =============================================================================
-
-def compute_tear_loss(
-    model,
-    input_ids,
-    attention_mask,
-    tokenizer,
-    lambda_weight: float = 0.3
-):
-    """
-    Compute The Tear's dual-objective loss.
-    
-    Loss = ResponseLoss + λ * ConsequenceLoss
-    
-    The model must learn to both respond AND predict what happens.
-    
-    Args:
-        model: The language model
-        input_ids: Tokenized input
-        attention_mask: Attention mask
-        tokenizer: Tokenizer with special tokens
-        lambda_weight: How much to weight consequence prediction (λ)
-    
-    Returns:
-        total_loss, response_loss, consequence_loss
-    """
-    # Forward pass
-    outputs = model(
-        input_ids=input_ids,
-        attention_mask=attention_mask,
-        labels=input_ids  # Causal LM - predict next token
-    )
-    
-    # For now, we use the standard LM loss
-    # The magic is in the DATA: the model learns to predict consequences
-    # because consequences are part of what it's trained to generate
-    
-    # Future enhancement: separate losses for response and witness sections
-    # by masking different parts of the sequence
-    
-    total_loss = outputs.loss
-    
-    return total_loss, total_loss * (1 - lambda_weight), total_loss * lambda_weight
-
-
-# =============================================================================
-# TRAINING LOOP - Where The Tear learns
+# TRAINING LOOP
 # =============================================================================
 
 def train(
-    model_name: str = "mistralai/Ministral-3-3B-Base-2512",
-    data_path: str = "data/raw/seed_consequences.json",
-    output_dir: str = "models/tear_v1",
-    lambda_weight: float = 0.3,
-    epochs: int = 3,
-    batch_size: int = 1,  # Small batch for 24GB VRAM
-    learning_rate: float = 2e-4,
-    gradient_accumulation_steps: int = 8,
+    model_name: str,
+    data_path: str,
+    output_dir: str,
+    epochs: int,
+    batch_size: int,
+    learning_rate: float,
+    gradient_accumulation_steps: int = 1, # Optimized for 4090
 ):
-    """
-    Train The Tear model.
-    
-    Args:
-        model_name: Base model to fine-tune
-        data_path: Path to consequence pairs JSON
-        output_dir: Where to save the trained model
-        lambda_weight: Weight for consequence loss (λ)
-        epochs: Number of training epochs
-        batch_size: Batch size (keep small for VRAM)
-        learning_rate: Learning rate for AdamW
-        gradient_accumulation_steps: Accumulate gradients for effective larger batch
-    """
     print("=" * 60)
-    print("THE TEAR - Training begins")
+    print("THE TEAR - Training (Consequence-First) [OPTIMIZED]")
     print("=" * 60)
-    print(f"Base model: {model_name}")
-    print(f"Lambda (consequence weight): {lambda_weight}")
-    print(f"Epochs: {epochs}")
-    print()
     
-    # Setup
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Device: {device}")
     
@@ -284,11 +188,7 @@ def train(
     dataset = TearDataset(data_path, tokenizer)
     print(f"Loaded {len(dataset)} training examples")
     
-    dataloader = DataLoader(
-        dataset,
-        batch_size=batch_size,
-        shuffle=True
-    )
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
     
     # Optimizer
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
@@ -296,6 +196,9 @@ def train(
     # Training
     model.train()
     global_step = 0
+    total_steps = len(dataloader) * epochs
+    
+    print(f"Total steps to train: {total_steps}")
     
     for epoch in range(epochs):
         print(f"\n--- Epoch {epoch + 1}/{epochs} ---")
@@ -305,16 +208,20 @@ def train(
             input_ids = batch["input_ids"].to(device)
             attention_mask = batch["attention_mask"].to(device)
             
-            # Compute loss
-            total_loss, response_loss, consequence_loss = compute_tear_loss(
-                model, input_ids, attention_mask, tokenizer, lambda_weight
+            # Standard Causal LM Loss
+            outputs = model(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                labels=input_ids
             )
             
-            # Scale loss for gradient accumulation
-            scaled_loss = total_loss / gradient_accumulation_steps
+            loss = outputs.loss
+            
+            # Scale loss
+            scaled_loss = loss / gradient_accumulation_steps
             scaled_loss.backward()
             
-            epoch_loss += total_loss.item()
+            epoch_loss += loss.item()
             
             # Update weights
             if (step + 1) % gradient_accumulation_steps == 0:
@@ -322,25 +229,24 @@ def train(
                 optimizer.zero_grad()
                 global_step += 1
                 
-                if global_step % 10 == 0:
-                    print(f"  Step {global_step}: loss = {total_loss.item():.4f}")
+                print(f"  Step {global_step}/{total_steps}: loss = {loss.item():.4f}")
 
-                # Every 50 steps, show what the model is learning
-                if global_step % 50 == 0 and global_step > 0:
+                # Sample generation (less frequent to save time, maybe just once per epoch)
+                if global_step % 20 == 0:
                     print("\n  --- Sample generation ---")
                     model.eval()
-                    test_input = "<|input|>I've been feeling really lonely lately.<|/input|><|response|>"
+                    test_input = f"{SPECIAL_TOKENS['input_start']}I've been feeling really lonely lately.{SPECIAL_TOKENS['input_end']}{SPECIAL_TOKENS['think_start']}"
                     test_ids = tokenizer(test_input, return_tensors="pt").input_ids.to(device)
                     with torch.no_grad():
                         output = model.generate(
                             test_ids,
-                            max_new_tokens=150,
+                            max_new_tokens=100, # Shorter sample for speed
                             do_sample=True,
                             temperature=0.7,
                             pad_token_id=tokenizer.pad_token_id
                         )
                     generated = tokenizer.decode(output[0], skip_special_tokens=False)
-                    print(f"  {generated[:500]}...")
+                    print(f"  {generated[:300]}...") # Truncated output
                     print("  --- End sample ---\n")
                     model.train()
         
@@ -356,24 +262,15 @@ def train(
     print("THE TEAR - Training complete")
     print("=" * 60)
     print()
-    print("'We trust that if it truly learns to predict consequences,")
-    print(" it will choose gentleness. Not because we forced it.")
-    print(" Because it sees.'")
-    print()
 
-
-# =============================================================================
-# MAIN
-# =============================================================================
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train The Tear model")
-    parser.add_argument("--model", type=str, default="mistralai/Ministral-3-3B-Base-2512")
-    parser.add_argument("--data", type=str, default="data/raw/seed_consequences.json")
+    parser.add_argument("--model", type=str, default="models/qwen3-1.7b-base")
+    parser.add_argument("--data", type=str, default="data/raw/all_seed_consequences.json")
     parser.add_argument("--output", type=str, default="models/tear_v1")
-    parser.add_argument("--lambda", dest="lambda_weight", type=float, default=0.3)
     parser.add_argument("--epochs", type=int, default=3)
-    parser.add_argument("--batch-size", type=int, default=1)
+    parser.add_argument("--batch-size", type=int, default=8) # Default 8 for 4090
     parser.add_argument("--lr", type=float, default=2e-4)
     
     args = parser.parse_args()
@@ -382,7 +279,6 @@ if __name__ == "__main__":
         model_name=args.model,
         data_path=args.data,
         output_dir=args.output,
-        lambda_weight=args.lambda_weight,
         epochs=args.epochs,
         batch_size=args.batch_size,
         learning_rate=args.lr,

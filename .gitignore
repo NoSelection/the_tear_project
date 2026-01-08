@@ -11,3 +11,4 @@ venv/
 
 # Data
 data/processed/
+data/generated_ollama/

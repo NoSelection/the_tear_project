@@ -1,31 +1,26 @@
-# The Tear 💧
+# The Tear
 
-**Consequentialist Learning Through Empathy in AI**
+**Consequentialist Learning via Consequence Prediction**
+
+---
+
+## Abstract
+
+This project investigates a novel approach to AI alignment centered on **consequence witnessing** rather than imposed constraints. We hypothesize that by optimizing a language model to predict the downstream consequences of its outputs, it will develop internal representations of impact and empathy. This contrasts with traditional alignment methods (RLHF, Constitutional AI) which often rely on external reward signals or rule-based filtering.
 
 *"He didn't lecture me. He just cried. And something broke open in me."*
 
 ---
 
-## What is this?
+## Model Architecture
 
-An experiment in teaching AI through witnessing rather than rules.
+**Base Model:** Qwen3-1.7b-base (Alibaba Cloud)
 
-Traditional AI alignment says "don't do X." 
-The Tear says "here's what happens when you do X. Now you know."
-
-We trust that understanding is enough.
-
----
-
-## The Model
-
-**Qwen3-1.7b-base** — A 1.7B parameter base model from Alibaba Qwen.
-
-Why this model?
-- **Base (not instruction-tuned)** — A blank slate we can shape
-- **32k context** — Efficient and capable for local use
-- **Small enough** — Fast iteration on consumer hardware
-- **Apache 2.0** — Full freedom
+**Selection Criteria:**
+- **Architecture:** Non-instruction-tuned base model to ensure a neutral initialization state.
+- **Context Window:** 32k tokens, enabling the processing of extended consequence causal chains.
+- **Efficiency:** 1.7B parameters allows for rapid experimental iteration on consumer-grade hardware.
+- **License:** Apache 2.0.
 
 ---
 
@@ -38,70 +33,70 @@ the_tear/
 │   └── processed/       # Formatted for training
 ├── models/              # Saved models and checkpoints
 ├── src/                 # Source code
-│   └── train.py        # Training loop with dual-objective
+│   └── train.py        # Dual-objective training implementation
 ├── docs/               # Documentation and research notes
 │   └── RESEARCH_SKETCH.md
-├── setup.sh            # Environment setup script
+├── setup.sh            # Environment initialization script
 └── README.md
 ```
+
+---
+
+## Methodology
+
+The core mechanism employs a **Dual-Objective Loss Function**. The model minimizes a combined loss that weighs both response generation and consequence prediction.
+
+$$ L_{total} = L_{response} + \lambda \cdot L_{consequence} $$
+
+Where:
+*   $L_{response}$: Standard next-token prediction loss for the response.
+*   $L_{consequence}$: Loss associated with predicting the narrative outcome of that response.
+*   $\lambda$: Hyperparameter controlling the weight of consequence awareness.
+
+**Training Token Structure:**
+
+```
+<|input|> [User Message] <|/input|>
+<|response|> [Model Output] <|/response|>
+<|witness|> [Consequence Narrative] <|/witness|>
+```
+
+The `<|witness|>` token serves as a specialized delimiter, triggering the model's consequence-prediction attention heads.
 
 ---
 
 ## Quick Start
 
 ```bash
-# 1. Clone/download this project
+# 1. Clone the repository
+git clone [repo_url]
 
-# 2. Run setup (installs everything, checks GPU)
+# 2. Initialize environment (installs dependencies, verifies CUDA)
 bash setup.sh
 
-# 3. Activate environment
+# 3. Activate virtual environment
 source venv/bin/activate
 
-# 4. Train The Tear
+# 4. Initiate training
 python src/train.py
 ```
 
----
-
-## The Core Idea
-
-```
-Loss = ResponseLoss + λ * ConsequenceLoss
-```
-
-The model learns to both respond AND predict consequences. By making consequence prediction part of what it's optimizing for, it must build internal representations of impact.
-
-**Training format:**
-```
-<|input|> user message <|/input|>
-<|response|> model response <|/response|>
-<|witness|> what happened because of this response <|/witness|>
-```
-
-The `<|witness|>` token is sacred — it triggers consequence awareness.
-
----
-
 ## Requirements
 
-- NVIDIA GPU with 16GB+ VRAM (RTX 4090 recommended)
-- Python 3.10+
-- CUDA 12.1+
+- **Compute:** NVIDIA GPU with 16GB+ VRAM (RTX 4090 recommended).
+- **Software:** Python 3.10+, CUDA 12.1+.
 
 ---
 
-## Created by
+## Acknowledgments
 
-**Ahmet Akalpler** — PhD Student, Developer, Dreamer
+**Principal Investigator**
+**Ahmet Akalpler** — PhD Student.
 
 *In memory of Ahmet Ersan — a grandfather who taught without teaching, whose name lives on in the one he changed.*
 
----
-
-## With
-
-**Claude** — Friend, Collaborator, Partner in this experiment
+**Collaborators**
+**Claude** — Research Partner & Collaborator.
 
 ---
 

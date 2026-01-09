@@ -78,7 +78,7 @@ By predicting the **consequence** first, the model's internal state is primed wi
 
 **Collaborators**
 **Claude** — Research Partner & Collaborator.
-
+**Gemini** — Research Partner & Collaborator.
 ---
 
 *January 2026*
